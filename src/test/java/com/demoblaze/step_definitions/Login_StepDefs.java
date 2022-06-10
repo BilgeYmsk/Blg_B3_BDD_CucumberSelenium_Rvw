@@ -1,12 +1,16 @@
 package com.demoblaze.step_definitions;
 
 import com.demoblaze.pages.LoginPage;
+import com.demoblaze.utilities.BrowserUtils;
 import com.demoblaze.utilities.ConfigurationReader;
 import com.demoblaze.utilities.Driver;
+import com.demoblaze.utilities.EncryptionUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class Login_StepDefs {
@@ -58,4 +62,21 @@ public class Login_StepDefs {
 
 
 
+    @When("User enters encrypted credentials")
+    public void user_enters_encrypted_credentials() {
+        String  username= EncryptionUtils.decrypt(ConfigurationReader.get("encryptesUsername"),"Blg123");
+        String  password= EncryptionUtils.decrypt(ConfigurationReader.get("encryptedpassword"),"Blg123");
+        loginPage.loginWithParameter_method(username,password);
+
+    }
+
+    @Then("the user able to see following categories")
+    public void theUserAbleToSeeFollowingCategories(List<String>expectedList) {
+        List<String>actualList=BrowserUtils.getElementsText(loginPage.categorieList_Loc);
+        assertEquals("List does NOT MATCH",expectedList,actualList);
+
+
+
+
+    }
 }

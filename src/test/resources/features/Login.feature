@@ -53,3 +53,8 @@ Feature: Login Test-the user should be able to login with valid credential
       |                  |                  | Please fill out Username and Password. |
       | kdfhödkfjh       | kdsfkf           | User does not exist.                   |
 #      | blginvalid       | Test1234!        |password must be at least 8 characters |
+
+
+  Scenario: Encryption Test
+    When User enters encrypted credentials
+    Then verify "Welcome blg"

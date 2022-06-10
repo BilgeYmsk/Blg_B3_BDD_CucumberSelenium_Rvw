@@ -10,4 +10,10 @@ public class BasePage {
     }
 
 
+    public void menu(){
+
+
+    }
+
+
 }
